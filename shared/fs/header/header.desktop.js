@@ -40,7 +40,7 @@ const FolderHeader = ({path, onChat, routePath}: FolderHeaderProps) => (
                 style={styles.headerIcon}
               />
             )}
-            <SendInAppAction path={path} sendIconClassName="" />
+            {Types.getPathLevel(path) > 2 && <SendInAppAction path={path} sendIconClassName="" />}
             <PathItemAction path={path} actionIconClassName="" routePath={routePath} />
           </Kb.Box>
         </Kb.Box>
