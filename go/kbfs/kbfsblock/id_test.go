@@ -77,7 +77,8 @@ func TestRandomIDInRange(t *testing.T) {
 		for j := i * 2; j < (math.MaxUint64 / 2); j *= 2 {
 			iAsFloat := float64(i) / maxUintFloat
 			jAsFloat := float64(j) / maxUintFloat
-			id, err := MakeRandomIDInRange(iAsFloat, jAsFloat, true)
+			id, err := MakeRandomIDInRange(iAsFloat, jAsFloat,
+				UseMathRandForTest)
 			require.NoError(t, err)
 			asInt := idToInt(id)
 			require.True(t, asInt >= i)
@@ -88,7 +89,7 @@ func TestRandomIDInRange(t *testing.T) {
 	t.Log("Test that the distribution of IDs is roughly uniform.")
 	buckets := make([]int, 16)
 	for i := 0; i < 100000; i++ {
-		id, err := MakeRandomIDInRange(0, 1.0, true)
+		id, err := MakeRandomIDInRange(0, 1.0, UseRealRandomness)
 		require.NoError(t, err)
 		asInt := idToInt(id)
 		buckets[asInt>>60]++
